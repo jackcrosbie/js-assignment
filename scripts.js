@@ -5,12 +5,11 @@ function computerPlay() {
     return choices[computerChoice];
 }
 
-
 function singleRound(computerSelection, playerSelection){
-    console.log("Your choice: " + playerSelection + "\nComputer's choice: " + computerSelection);
+    console.log("Your choice: " + playerSelection + "\nComputer: " + computerSelection);
     //In event of a tie
     if(computerSelection == playerSelection) {
-        console.log("You Tied");
+        console.log("You drew");
     }
     //Winning selections
     if(computerSelection == "ROCK"){
@@ -42,8 +41,8 @@ function singleRound(computerSelection, playerSelection){
 
 function game() {
     singleRound();
-    for(let i=0; i<5; i++) {
-        const computerSelection = computerPlay()
+    for(let i = 0; i < 5; i++) {
+        const computerSelection = computerPlay();
         console.log(singleRound(playerSelection, computerSelection))
         console.log("your score = " + userScore);
         console.log("Computer's score = " + computerScore);

@@ -1,0 +1,55 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital@1&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+.full-page {
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.game-container {
+    display: block;
+    height: 400px;
+    width: 80%;
+    border: 1px black solid;
+    margin-top: 10%;
+    background-color: black;
+}
+
+#main-heading {
+    height: 25%;
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    align-items: center;
+}
+
+.main-container {
+    height: 75%;
+    width: 100%;
+    display: flex;
+    align-content: space-around;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.heading-text {
+    font-family: 'Playfair Display', serif;
+    color: white;
+    font-size: 3em;
+  }
+
+.play-game {
+    color: white;
+    font-size: 3em;
+    text-decoration: none;
+    border: 1px solid white;
+    padding: 2%;
+}

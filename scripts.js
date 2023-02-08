@@ -1,4 +1,19 @@
-const choices = ['ROCK', 'PAPER', 'SCISSORS']
+const choices = ['ROCK', 'PAPER', 'SCISSORS'];
+const playerText = document.querySelector('#playerText');
+const computerText = document.querySelector('#computerText');
+const resultText = document.querySelector('#resultText');
+const choiceBtns = document.querySelectorAll('.choiceBtn');
+let player;
+let computer;
+let result;
+
+choiceBtns.forEach(button => button.addEventListener("click", () => {
+    player = button.textContent;
+    computerPlay();
+    playerText.textContent = `Player: ${player}`;
+    computerText.textContent = `Computer: ${computer}`;
+    resultText.textContent = singleRound();
+}));
 
 function computerPlay() {
     var computerChoice = [Math.floor(Math.random() * choices.length)];
@@ -39,7 +54,7 @@ function singleRound(computerSelection, playerSelection){
     }
 }
 
-function game() {
+/* function game() {
     singleRound();
     for(let i = 0; i < 5; i++) {
         const computerSelection = computerPlay();
@@ -54,4 +69,4 @@ const playerSelection = "ROCK";
 let userScore = parseInt(0);
 let computerScore = parseInt(0);
 
-game();
+game(); */

@@ -3,16 +3,19 @@ const playerText = document.querySelector('#playerText');
 const computerText = document.querySelector('#computerText');
 const resultText = document.querySelector('#resultText');
 const choiceBtns = document.querySelectorAll('.choiceBtn');
-let player;
-let computer;
-let result;
+let playerScore = 0;
+let computerScore = 0;
+
 
 choiceBtns.forEach(button => button.addEventListener("click", () => {
-    player = button.textContent;
-    computerPlay();
+    let player = button.textContent;
+    let computer = computerPlay();
     playerText.textContent = `Player: ${player}`;
     computerText.textContent = `Computer: ${computer}`;
-    resultText.textContent = singleRound();
+    resultText.textContent = singleRound(computer, player);
+    document.querySelector("#playerScore").textContent = `Player Score: ${playerScore}`;
+    document.querySelector("#computerScore").textContent = `Computer Score: ${computerScore}`;
+
 }));
 
 function computerPlay() {
@@ -29,7 +32,7 @@ function singleRound(computerSelection, playerSelection){
     //Winning selections
     if(computerSelection == "ROCK"){
         if(playerSelection.toUpperCase() == "PAPER") {
-            userScore++;
+            playerScore++;
             console.log("Congratulations! you've won");           
         } else if(playerSelection.toUpperCase() == "SCISSORS") {
             computerScore++;
@@ -37,22 +40,26 @@ function singleRound(computerSelection, playerSelection){
         }
     } else if(computerSelection == "PAPER"){
         if(playerSelection.toUpperCase() == "ROCK"){
-            computerSelection++;
+            computerScore++;
             console.log("You lose, Paper beats Rock!");       
         } else if(playerSelection.toUpperCase() == "SCISSORS"){
-            userScore++;
+            playerScore++;
             console.log("Congratulations! you've won");
         }
     } else if(computerSelection == "SCISSORS"){
         if(playerSelection.toUpperCase() == "ROCK"){
-            userScore++;
+            playerScore++;
             console.log("Congratulations! you've won");           
         } else if(playerSelection.toUpperCase() == "PAPER"){
             computerScore++;
             console.log("You lose, Scissors beats Paper!");
         }
     }
+    document.querySelector("#playerScore").textContent = `Player Score: ${playerScore}`;
+    document.querySelector("#computerScore").textContent = `Computer Score: ${computerScore}`;
 }
+
+
 
 /* function game() {
     singleRound();

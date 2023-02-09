@@ -6,74 +6,70 @@ const choiceBtns = document.querySelectorAll('.choiceBtn');
 let playerScore = 0;
 let computerScore = 0;
 
-
 choiceBtns.forEach(button => button.addEventListener("click", () => {
-    let player = button.textContent;
+    let player = button.textContent.toUpperCase();
     let computer = computerPlay();
     playerText.textContent = `Player: ${player}`;
     computerText.textContent = `Computer: ${computer}`;
-    resultText.textContent = singleRound(computer, player);
-    document.querySelector("#playerScore").textContent = `Player Score: ${playerScore}`;
-    document.querySelector("#computerScore").textContent = `Computer Score: ${computerScore}`;
-
-}));
-
+    let result = singleRound(computer, player);
+    resultText.textContent = `Result: ${result}`;
+    updateScores(result);
+}));  
+   
 function computerPlay() {
-    var computerChoice = [Math.floor(Math.random() * choices.length)];
+    var computerChoice = Math.floor(Math.random() * choices.length);
     return choices[computerChoice];
 }
 
-function singleRound(computerSelection, playerSelection){
-    console.log("Your choice: " + playerSelection + "\nComputer: " + computerSelection);
-    //In event of a tie
-    if(computerSelection == playerSelection) {
-        console.log("You drew");
+function singleRound(computerSelection, playerSelection) {
+    playerSelection = playerSelection.toUpperCase();
+    let result;
+    
+    if (computerSelection === playerSelection) {
+      result = "It's a draw!";
+    } else if (computerSelection === "ROCK") {
+      if (playerSelection === "PAPER") {
+        result = "You win!";
+      } else {
+        result = "You lose!";
+      }
+    } else if (computerSelection === "PAPER") {
+      if (playerSelection === "ROCK") {
+        result = "You lose!";
+      } else {
+        result = "You win!";
+      }
+    } else if (computerSelection === "SCISSORS") {
+      if (playerSelection === "ROCK") {
+        result = "You win!";
+      } else {
+        result = "You lose!";
+      }
     }
-    //Winning selections
-    if(computerSelection == "ROCK"){
-        if(playerSelection.toUpperCase() == "PAPER") {
-            playerScore++;
-            console.log("Congratulations! you've won");           
-        } else if(playerSelection.toUpperCase() == "SCISSORS") {
-            computerScore++;
-            console.log("You lose, Rock beats Scissors!");
-        }
-    } else if(computerSelection == "PAPER"){
-        if(playerSelection.toUpperCase() == "ROCK"){
-            computerScore++;
-            console.log("You lose, Paper beats Rock!");       
-        } else if(playerSelection.toUpperCase() == "SCISSORS"){
-            playerScore++;
-            console.log("Congratulations! you've won");
-        }
-    } else if(computerSelection == "SCISSORS"){
-        if(playerSelection.toUpperCase() == "ROCK"){
-            playerScore++;
-            console.log("Congratulations! you've won");           
-        } else if(playerSelection.toUpperCase() == "PAPER"){
-            computerScore++;
-            console.log("You lose, Scissors beats Paper!");
-        }
-    }
-    document.querySelector("#playerScore").textContent = `Player Score: ${playerScore}`;
-    document.querySelector("#computerScore").textContent = `Computer Score: ${computerScore}`;
+    return result;
 }
 
-
-
-/* function game() {
-    singleRound();
-    for(let i = 0; i < 5; i++) {
-        const computerSelection = computerPlay();
-        console.log(singleRound(playerSelection, computerSelection))
-        console.log("your score = " + userScore);
-        console.log("Computer's score = " + computerScore);
-       }
+function updateScores(result) {
+    if (result === "You win!") {
+      playerScore++;
+    } else if (result === "You lose!") {
+      computerScore++;
+    }
+  
+    document.getElementById("playerScore").innerHTML = `Player Score: ${playerScore}`;
+    document.getElementById("computerScore").innerHTML = `Computer Score: ${computerScore}`;
+    console.log("Player Score: " + playerScore + " Computer Score: " + computerScore);
+    checkWinner();
 }
 
-const computerSelection = computerPlay();
-const playerSelection = "ROCK";
-let userScore = parseInt(0);
-let computerScore = parseInt(0);
-
-game(); */
+function checkWinner() {
+    if (playerScore === 5) {
+      resultText.textContent = "Player wins the game!";
+      playerScore = 0;
+      computerScore = 0;
+    } else if (computerScore === 5) {
+      resultText.textContent = "Computer wins the game!";
+      playerScore = 0;
+      computerScore = 0;
+    }
+  }
